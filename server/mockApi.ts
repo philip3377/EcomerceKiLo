@@ -1,4 +1,5 @@
 import type { Connect } from 'vite';
+import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { Product, Order, CustomerInfo, CartItem } from '../src/types';
 
 const products: Product[] = [
@@ -15,12 +16,12 @@ const products: Product[] = [
 const orders: Order[] = [];
 let orderCounter = 0;
 
-function json(res: Connect.ServerResponse, status: number, data: unknown) {
+function json(res: ServerResponse, status: number, data: unknown) {
   res.writeHead(status, { 'Content-Type': 'application/json' });
   res.end(JSON.stringify(data));
 }
 
-function errorJson(res: Connect.ServerResponse, status: number, message: string, details?: string, path?: string) {
+function errorJson(res: ServerResponse, status: number, message: string, details?: string, path?: string) {
   json(res, status, {
     statusCode: status,
     message,
@@ -30,7 +31,7 @@ function errorJson(res: Connect.ServerResponse, status: number, message: string,
   });
 }
 
-function readBody(req: Connect.IncomingMessage): Promise<string> {
+function readBody(req: IncomingMessage): Promise<string> {
   return new Promise((resolve, reject) => {
     let body = '';
     req.on('data', (chunk) => (body += chunk));
