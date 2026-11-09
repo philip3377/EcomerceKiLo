@@ -18,15 +18,15 @@
         "patch",
         "minor"
       ],
-      "groupName": "Non-major dependency updates"
-      "automerge": false,
+      "groupName": "Non-major dependency updates",
+      "automerge": false
     },
     {
       "description": "keep major updates separate for manual review",
       "matchUpdateTypes": [
         "major"
-      ]
-      "automerge": false,
+      ],
+      "automerge": false
     }
   ]
 }
